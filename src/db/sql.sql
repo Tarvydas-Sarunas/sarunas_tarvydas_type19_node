@@ -18,6 +18,28 @@ CREATE TABLE shop_items (
   item_type_id INT UNSIGNED
 );
 
+-- Create item_types table
+CREATE TABLE item_types (
+  item_type_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  item_type_name VARCHAR(255) NOT NULL
+);
+
+-- Create orders table--
+CREATE TABLE orders (
+  order_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  user_id INT UNSIGNED,
+  shop_item_id INT UNSIGNED,
+  quantity INT,
+  total_price DECIMAL(10, 2),
+  status VARCHAR(255)
+);
+
+-- Create user_roles table
+CREATE TABLE user_roles (
+  role_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  role_name VARCHAR(255)
+);
+
 
 -- Add all posts
 INSERT INTO posts (title, author, date, body) VALUES

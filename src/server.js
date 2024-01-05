@@ -3,7 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const mysql = require('mysql2/promise');
-const { dbConfig } = require('./config');
+const testConnection = require('./routes/testRoutes');
 
 const app = express();
 
@@ -20,20 +20,7 @@ app.get('/', (req, res) => {
 });
 
 // connect
-async function testConnection() {
-  let conn;
-  try {
-    conn = await mysql.createConnection(dbConfig);
-    await conn.query('SELECT * FROM posts LIMIT 1');
-    console.log('Succesfuly connected to mysql ');
-  } catch (error) {
-    console.log('testConnection failed, did you start XAMPP mate???');
-    console.log('error ===', error);
-  } finally {
-    if (conn) conn.end();
-  }
-}
-testConnection();
+// testConnection();
 
 // app.listen(PORT);
 app.listen(PORT, () => {
