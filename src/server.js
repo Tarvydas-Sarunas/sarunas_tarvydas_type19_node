@@ -20,9 +20,11 @@ app.get('/', (req, res) => {
 
 // import Router
 const usersRouter = require('./routes/usersRouter');
+const shopRouter = require('./routes/shopRouter');
 
 // use Router
 app.use('/api/auth', usersRouter);
+app.use('/api/shop_items', shopRouter);
 
 // connect
 // testConnection();

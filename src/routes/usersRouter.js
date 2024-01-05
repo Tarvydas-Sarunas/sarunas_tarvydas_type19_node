@@ -3,13 +3,14 @@ const { dbQueryWithData } = require('../helper');
 
 const usersRouter = express.Router();
 
+const dbTable = 'users';
 // routes
 // POST /api/auth/register - registruoti vartotoja su name, email, password, role_id
 usersRouter.post('/register', async (req, res) => {
   const { user_name: userName, email, password, role_id: roleId } = req.body;
   const newUser = [userName, email, password, roleId];
   const sql = `
-  INSERT INTO users (user_name, email, password, role_id)
+  INSERT INTO ${dbTable} (user_name, email, password, role_id)
   VALUES
     (?, ?, ?, ?)
     `;
@@ -32,7 +33,7 @@ usersRouter.post('/register', async (req, res) => {
 // POST /api/auth/login - prijungti vartotoja su email ir password
 usersRouter.post('/login', async (req, res) => {
   const { user_name: userName, password } = req.body;
-  const sql = 'SELECT * FROM `users` WHERE user_name=?';
+  const sql = `SELECT * FROM ${dbTable} WHERE user_name=?`;
   const [rows, error] = await dbQueryWithData(sql, [userName]);
   console.log('error ===', error);
   // neradom
