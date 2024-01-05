@@ -1,5 +1,21 @@
 GET http://localhost:3000
 
-###
-GET http://localhost:3000/api/users
+### create user
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
 
+{
+"user_name": "Laimonas", 
+"email": "laimonas.lietuva@mail.com", 
+"password": "pass15", 
+"role_id": 2
+}
+
+### user prisijungimas
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+"user_name": "Laimonas",  
+"password": "pass15"
+}

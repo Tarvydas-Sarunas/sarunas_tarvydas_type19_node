@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-const mysql = require('mysql2/promise');
 const testConnection = require('./routes/testRoutes');
 
 const app = express();
@@ -18,6 +17,12 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('Hello World');
 });
+
+// import Router
+const usersRouter = require('./routes/usersRouter');
+
+// use Router
+app.use('/api/auth', usersRouter);
 
 // connect
 // testConnection();
