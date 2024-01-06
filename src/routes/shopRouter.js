@@ -4,6 +4,7 @@ const shopRouter = express.Router();
 
 const dbTable = 'shop_items';
 // routes
+
 // POST /api/shop_items - sukurti parduotuves preke su name, price, description, image, item_type_id
 shopRouter.post('/', async (req, res) => {
   const {
@@ -17,23 +18,21 @@ shopRouter.post('/', async (req, res) => {
   const sql = `
     INSERT INTO ${dbTable} (shop_item_name, price, description, image, item_type_id)
     VALUES (?, ?, ?, ?, ?)`;
-  const [rezObj, error] = await dbQueryWithData(sql, shopItem);
+  const [newShopItRezObj, error] = await dbQueryWithData(sql, shopItem);
   if (error) {
     res.status(500).json({ error: 'Internal server error' });
     return;
   }
-  if (rezObj.affectedRows === 0) {
+  if (newShopItRezObj.affectedRows === 0) {
     res.status(400).json({ msg: 'Something went wrong' });
     return;
   }
-  if (rezObj.affectedRows === 1) {
+  if (newShopItRezObj.affectedRows === 1) {
     res.status(201).json({ msg: 'New shop item was added' });
     return;
   }
-  res.json(rezObj);
+  res.json(newShopItRezObj);
 });
-
-module.exports = shopRouter;
 
 // GET /api/shop_items - gauti visas parduotuves prekes
 shopRouter.get('/', async (req, res) => {
@@ -62,16 +61,16 @@ shopRouter.get('/:id', async (req, res) => {
 shopRouter.delete('/:id', async (req, res) => {
   const id = +req.params.id;
   const sql = `UPDATE ${dbTable} SET isArchived=1 WHERE shop_item_id=? LIMIT 1`;
-  const [apdRezObj, error] = await dbQueryWithData(sql, [id]);
+  const [apdShopItRezObj, error] = await dbQueryWithData(sql, [id]);
   if (error) {
     res.status(500).json({ error: 'Internal server error' });
     return;
   }
-  if (apdRezObj.affectedRows === 0) {
+  if (apdShopItRezObj.affectedRows === 0) {
     res.status(404).json({ msg: 'This id does not exist' });
     return;
   }
-  if (apdRezObj.affectedRows === 1) {
+  if (apdShopItRezObj.affectedRows === 1) {
     res.status(200).json({ msg: `Shop item with id ${id} was deleted` });
   }
 });

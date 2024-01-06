@@ -21,10 +21,14 @@ app.get('/', (req, res) => {
 // import Router
 const usersRouter = require('./routes/usersRouter');
 const shopRouter = require('./routes/shopRouter');
+const ordersRouter = require('./routes/ordersRouter');
+const userRolesRouter = require('./routes/userRolesRouter');
 
 // use Router
 app.use('/api/auth', usersRouter);
 app.use('/api/shop_items', shopRouter);
+app.use('/api/orders', ordersRouter);
+app.use('/api/user_roles', userRolesRouter);
 
 // connect
 // testConnection();

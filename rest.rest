@@ -45,5 +45,21 @@ GET http://localhost:3000/api/shop_items/1
 ### istrina viena shop_item pagal jo id
 DELETE http://localhost:3000/api/shop_items/5
 
-#####  =====================================
+#####  ORDERS =====================================
 
+### sukurti nauja shop item
+POST http://localhost:3000/api/orders
+Content-Type: application/json
+
+{
+  "user_id": 5,
+  "shop_item_id": 3,
+  "quantity": 2,
+  "total_price": 2,
+  "status": "Draft"
+}
+
+##### USER_ROLES =====================================
+
+### gauti visas user roles
+GET http://localhost:3000/api/user_roles

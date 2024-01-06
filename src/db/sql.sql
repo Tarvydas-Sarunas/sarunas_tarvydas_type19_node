@@ -12,9 +12,9 @@ CREATE TABLE users (
 CREATE TABLE shop_items (
   shop_item_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   shop_item_name VARCHAR(255) NOT NULL,
-  price DECIMAL(10, 2) NOT NULL,
+  price DECIMAL(10, 2) NOT NULL
   description TEXT,
-  image VARCHAR(255),
+  image VARCHAR(255) NOT NULL,
   item_type_id INT UNSIGNED
 );
 
@@ -27,17 +27,17 @@ CREATE TABLE item_types (
 -- Create orders table--
 CREATE TABLE orders (
   order_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-  user_id INT UNSIGNED,
-  shop_item_id INT UNSIGNED,
-  quantity INT,
-  total_price DECIMAL(10, 2),
+  user_id INT UNSIGNED NOT NULL,
+  shop_item_id INT UNSIGNED NOT NULL,
+  quantity INT NOT NULL,
+  total_price DECIMAL(10, 2) NOT NULL,
   status VARCHAR(255)
 );
 
 -- Create user_roles table
 CREATE TABLE user_roles (
-  role_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-  role_name VARCHAR(255)
+  role_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  role_name VARCHAR(255) NOT NULL
 );
 
 
