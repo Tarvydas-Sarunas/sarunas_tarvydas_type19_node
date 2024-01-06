@@ -32,9 +32,9 @@ usersRouter.post('/register', async (req, res) => {
 
 // POST /api/auth/login - prijungti vartotoja su email ir password
 usersRouter.post('/login', async (req, res) => {
-  const { user_name: userName, password } = req.body;
-  const sql = `SELECT * FROM ${dbTable} WHERE user_name=?`;
-  const [rows, error] = await dbQueryWithData(sql, [userName]);
+  const { email, password } = req.body;
+  const sql = `SELECT * FROM ${dbTable} WHERE email=?`;
+  const [rows, error] = await dbQueryWithData(sql, [email]);
   console.log('error ===', error);
   // neradom
   if (rows.length === 0) {

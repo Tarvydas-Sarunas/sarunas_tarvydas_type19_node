@@ -46,6 +46,7 @@ header {
 .login {
   background-color: var(--second-color);
   border-radius: 5px;
+  padding: 0.3rem 1.3rem;
 }
 .hr {
   width: 100%;
@@ -82,10 +83,8 @@ input {
 .btn {
   border: none;
   background-color: transparent;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: bold;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   cursor: pointer;
   /* primary styles */
   border: 1px solid var(--main-color);
@@ -103,4 +102,12 @@ input {
 .btn-secondary {
   color: white;
   background-color: var(--black);
+}
+.invalid-feedback {
+  padding-top: 1rem;
+  font-size: 1.5rem;
+  color: red;
+}
+.is-invalid {
+  background-color: #e99090;
 }
