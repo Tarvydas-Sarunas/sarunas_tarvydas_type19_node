@@ -1,0 +1,106 @@
+:root {
+  --main-color: #f8f7e5;
+  --second-color: #ff834f;
+  --black: #1d1d1d;
+}
+
+body {
+  font-family: 'Playfair Display', serif;
+  background-color: var(--main-color);
+}
+/* HEDEAR */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 12px;
+  position: sticky;
+  top: 0;
+  background-color: var(--main-color);
+}
+.logo,
+.main-nav {
+  display: flex;
+}
+.logo {
+  font-size: 25px;
+  padding: 0.2em 0.6em;
+  letter-spacing: 2px;
+}
+.nav-link {
+  font-size: 16px;
+  padding: 0.2em 1em;
+  display: inline-block;
+  letter-spacing: 2px;
+}
+.nav-link:hover,
+.logo:hover {
+  background-color: ;
+}
+.nav-item {
+  list-style: none;
+}
+.active {
+  font-weight: bold;
+}
+.login {
+  background-color: var(--second-color);
+  border-radius: 5px;
+}
+.hr {
+  width: 100%;
+  height: 0.1rem;
+  background-color: var(--black);
+}
+h1 {
+  font-size: 3rem;
+  padding-top: 3rem;
+  text-align: center;
+}
+.input-container {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 1.5rem;
+}
+.login-form {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+.btn {
+  border: none;
+  background-color: transparent;
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  cursor: pointer;
+  /* primary styles */
+  border: 1px solid var(--main-color);
+  color: var(--black);
+  border-radius: 5px;
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 0.7em 1.4em;
+  background-color: var(--second-color);
+}
+.btn:hover {
+  background-color: var(--black);
+  color: white;
+}
+.btn-secondary {
+  color: white;
+  background-color: var(--black);
+}

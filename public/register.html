@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- fonts  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <!-- fonts  -->
+  <title>Document</title>
+  <link rel="stylesheet" href="styles/reset.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <script src="js/login.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <a href="#" class="logo">New Store</a>
+    </div>
+    <div class="nav">
+      <ul class="main-nav">
+        <li class="nav-item">
+          <a class="nav-link " aria-current="page" href="shop.html">SHOP</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="register.html">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link login">Login</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+  <div class="hr"></div>
+
+
+
+  <div class="container">
+
+    <h1>Create Your Account</h1>
+
+    <div class="form-container">
+      <form id="login-form" class="login-form">
+        <div class="input-container">
+          <label for="username" class="form-label">Username</label>
+          <input value="james@band.com" type="email" id="username" name="username" class="form-control"
+            placeholder="Enter your email">
+        </div>
+        <div class="input-container">
+          <label for="password" class="form-label">Password</label>
+          <input type="text" id="password" name="password" class="form-control" placeholder="Enter your password">
+        </div>
+        <div class="input-container">
+          <button type="submit" class="btn btn-primary">Create your account</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>
