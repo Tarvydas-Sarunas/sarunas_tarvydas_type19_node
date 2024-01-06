@@ -12,7 +12,7 @@
   <title>Document</title>
   <link rel="stylesheet" href="styles/reset.css">
   <link rel="stylesheet" href="styles/style.css">
-  <script src="js/register.js" defer></script>
+  <script src="js/register.js" type="module"></script>
 </head>
 
 <body>
@@ -43,7 +43,7 @@
     <h1>Create Your Account</h1>
 
     <div class="form-container">
-      <form id="login-form" class="login-form">
+      <form id="register-form" class="login-form">
         <div class="input-container">
           <label for="username" class="form-label">Your Name</label>
           <input value="Augis" type="text" id="username" name="username" class="form-control"
@@ -64,8 +64,10 @@
             placeholder="Repeat your password">
         </div>
         <div class="input-container">
-          <label for="role" class="form-label">Entre your Role</label>
-          <input type="text" id="role" name="role" class="form-control" placeholder="Entre your Role">
+          <label for="role" class="form-label">Roles</label>
+          <select class="form-control" id="role">
+            <option selected disabled value="">Please choose your role</option>
+          </select>
         </div>
         <div class="input-container">
           <button type="submit" class="btn btn-primary">Create your account</button>

@@ -3,6 +3,7 @@ console.log('helper.js file was loaded');
 
 const baseUrl = 'http://localhost:3000/api';
 export const authUrl = `${baseUrl}/auth`;
+export const rolsUrl = `${baseUrl}/user_roles`;
 
 //  hellper fetch function
 export async function getDataFetch(url) {
