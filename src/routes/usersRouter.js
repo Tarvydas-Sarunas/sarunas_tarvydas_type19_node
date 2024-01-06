@@ -8,13 +8,6 @@ const dbTable = 'users';
 // POST /api/auth/register - registruoti vartotoja su name, email, password, role_id
 usersRouter.post('/register', async (req, res) => {
   const { user_name: userName, email, password, role_id: roleId } = req.body;
-
-  // tikrinu ar email existuoja su checkEmail funkcija
-  const emailExist = await checkEmail(email);
-  if (emailExist) {
-    res.status(400).json({ msg: 'Email already exists' });
-    return;
-  }
   const newUser = [userName, email, password, roleId];
   const sql = `
   INSERT INTO ${dbTable} (user_name, email, password, role_id)
@@ -36,19 +29,6 @@ usersRouter.post('/register', async (req, res) => {
   }
   res.json(newUserObj);
 });
-
-async function checkEmail(emailForCheck) {
-  // tikriname email is db su count
-  const sql = `SELECT COUNT(*) as count FROM ${dbTable} WHERE email = ?`;
-  const [result, error] = await dbQueryWithData(sql, [emailForCheck]);
-  // jei klaida
-  if (error) {
-    console.error('Error checking email existence:', error);
-    return false;
-  }
-  // jei resultats daugiau uz 0 gauname
-  return result.count > 0;
-}
 
 // POST /api/auth/login - prijungti vartotoja su email ir password
 usersRouter.post('/login', async (req, res) => {

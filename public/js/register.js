@@ -43,7 +43,7 @@ els.registerForm.addEventListener('submit', (e) => {
   };
   console.log('newUser ===', newUser);
   // isiunciu post su
-  createNewUser(newUserObj);
+  createNewUser(newUser);
 });
 
 function createNewUser(userObj) {
@@ -56,7 +56,7 @@ function createNewUser(userObj) {
   })
     .then((resp) => {
       if (resp.status === 201) {
-        window.location = 'index.html';
+        window.location = 'shop.html';
       } else {
         return resp.json();
       }
