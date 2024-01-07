@@ -1,5 +1,5 @@
 'use strict';
-console.log('front.js file was loaded');
+console.log('login.js file was loaded');
 
 import { authUrl } from './modules/helper.js';
 
@@ -24,6 +24,8 @@ els.form.addEventListener('submit', (e) => {
 });
 
 function authLogin(userObj) {
+  console.log('Before fetch call');
+
   fetch(`${authUrl}/login`, {
     method: 'POST',
     headers: {
@@ -32,26 +34,36 @@ function authLogin(userObj) {
     body: JSON.stringify(userObj),
   })
     .then((resp) => {
+      console.log(resp.status);
       // kai sekme tai naviguojam i home page
       if (resp.status === 200) {
         // issaugau i session storage musu prisijungima
-        console.log('issaugoti sesijos kintamaji');
+        console.log('Response Status:', resp.status);
         // sessionStorage.setItem('loggedIn', userObj.email);
-
-        // ir kai visaks ok mane nuveda i index.html
-        window.location.href = 'shop.html';
-      } else if (resp.status === 400) {
-        isInvalid();
+        console.log('connection ok');
       }
+      if (!resp.ok) {
+        console.log('Response Not OK');
+        throw new Error('Network response was not ok');
+      }
+      // ir kai visaks ok mane nuveda i shop.html
+      // window.location.href = 'shop.html';
       return resp.json();
+      //   } else if (resp.status === 400) {
+      //     isInvalid();
+      //   }
+      //   return resp.json();
     })
     .then((data) => {
-      console.log(data);
+      console.log('Data:', data);
+      isInvalid(data);
       if (data.type === 'validation') {
-        // handleErrors(data)
         alert(data.msg);
         return;
       }
+
+      console.log('Connection Success');
+      window.location.href = 'shop.html';
     })
     .catch((error) => {
       console.warn('ivyko klaida:', error);

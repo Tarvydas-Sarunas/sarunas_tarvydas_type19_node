@@ -30,8 +30,7 @@ function makeOneCard(sObj) {
   liEl.className = 'card';
   liEl.dataset.shopItId = sObj.shop_item_id;
   liEl.innerHTML = `
- 
-    <img src="${sObj.image}" class="card-img-top" alt="${sObj.shop_item_name}">
+    <img src="${sObj.image}" alt="${sObj.shop_item_name}">
     <div class="card-body">
       <h5 class="card-title">${sObj.shop_item_name}</h5>
       <p class="card-text">${sObj.description} </p>
@@ -41,7 +40,8 @@ function makeOneCard(sObj) {
       <a href="#" class="btn">Add to cart</a>
       <button class="btn btn-secondary">Delete</button>
   </div>
-`;
+
+  `;
   // Nr 2 de possiblite
   // const btnEl = liEl.querySelector('button');
   // btnEl.addEventListener('click', (event) => {

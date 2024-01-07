@@ -61,13 +61,9 @@ function createNewUser(userObj) {
         return resp.json();
       }
     })
-    .then((errors) => {
-      console.log('data ===', errors);
-      if (errors && errors.length > 0) {
-        isInvalid(errors);
-      }
-      // redirect to logs.html?petId=2
-      // window.location = 'index.html';
+    .then((data) => {
+      console.log('data ===', data);
+      // isInvalid([data.msg]);
     })
     .catch((err) => {
       console.log('err ===', err);

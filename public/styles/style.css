@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 :root {
   --main-color: #f8f7e5;
   --second-color: #ff834f;
@@ -97,12 +101,15 @@ select {
   background-color: var(--second-color);
 }
 .btn:hover {
-  background-color: var(--black);
+  background-color: rgb(119, 192, 8);
   color: white;
 }
 .btn-secondary {
   color: white;
   background-color: var(--black);
+}
+.btn-secondary:hover {
+  background-color: red;
 }
 .invalid-feedback {
   padding-top: 1rem;
@@ -117,9 +124,11 @@ select {
   padding-left: 0;
 }
 .card {
-  border: 1px solid #c3c3c3;
-  padding: 15px;
+  padding: 10px;
   text-align: center;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border-radius: 5px;
 }
 .pet-name {
   font-weight: normal;
@@ -133,4 +142,16 @@ select {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 15px;
+}
+.flex {
+  display: flex;
+  gap: 10px;
+}
+.center {
+  align-items: center;
+  justify-content: center;
+}
+img {
+  max-width: 100%;
+  height: 200px;
 }
