@@ -7,7 +7,7 @@
   <title>Document</title>
   <link rel="stylesheet" href="styles/reset.css">
   <link rel="stylesheet" href="styles/style.css">
-  <script src="js/orders.js" defer></script>
+  <script src="js/orders.js" type="module"></script>
 </head>
 
 <body>
@@ -21,6 +21,9 @@
           <a class="nav-link " aria-current="page" href="shop.html">SHOP</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link active" href="orders.html">Orders</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="register.html">Register</a>
         </li>
         <li class="nav-item">
@@ -29,9 +32,36 @@
       </ul>
     </div>
   </header>
-  <h1>ORDER</h1>
 
+  <div class="hr"></div>
+  <div class="container">
 
+    <h1>Your Orders</h1>
+
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Article</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Domas</td>
+          <td>Duonos kepalas</td>
+          <td>2.5</td>
+        </tr>
+        <tr class="active-row">
+          <td>Aurimas</td>
+          <td>Alus</td>
+          <td>1.5</td>
+        </tr>
+        <!-- and so on... -->
+      </tbody>
+    </table>
+
+  </div>
 </body>
 
 </html>

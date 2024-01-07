@@ -131,13 +131,15 @@ textarea {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   border-radius: 5px;
 }
-.pet-name {
+.card-title {
   font-weight: normal;
-  font-size: 28px;
+  font-size: 20px;
+  margin: 10px 0;
 }
 
-.pet-date {
-  margin-bottom: 0;
+.card-text {
+  font-weight: normal;
+  font-size: 14px;
 }
 .grid {
   display: grid;
@@ -155,4 +157,38 @@ textarea {
 img {
   max-width: 100%;
   height: 200px;
+}
+
+/* ===== TABLE ================== */
+.styled-table {
+  border-collapse: collapse;
+  margin: 40px 0;
+  font-size: 1.5em;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  border: 1px solid #000;
+  margin-left: auto;
+  margin-right: auto;
+}
+.styled-table thead tr {
+  background-color: #69b4b6;
+  color: #ffffff;
+  text-align: left;
+}
+.styled-table th,
+.styled-table td {
+  padding: 12px 15px;
+}
+.styled-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+  background-color: #fff;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f8f7e5;
+  color: black;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #7d99a2;
 }
