@@ -23,12 +23,14 @@ const usersRouter = require('./routes/usersRouter');
 const shopRouter = require('./routes/shopRouter');
 const ordersRouter = require('./routes/ordersRouter');
 const userRolesRouter = require('./routes/userRolesRouter');
+const itemTypesRouter = require('./routes/itemTypesRouter');
 
 // use Router
 app.use('/api/auth', usersRouter);
 app.use('/api/shop_items', shopRouter);
 app.use('/api/orders', ordersRouter);
 app.use('/api/user_roles', userRolesRouter);
+app.use('/api/item_types', itemTypesRouter);
 
 // connect
 // testConnection();

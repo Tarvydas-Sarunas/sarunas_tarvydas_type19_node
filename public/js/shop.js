@@ -37,7 +37,7 @@ function makeOneCard(sObj) {
     <div class="card-body">
       <h5 class="card-title">${sObj.shop_item_name}</h5>
       <p class="card-text">${sObj.description} </p>
-      <h5 class="card-title">${sObj.price}</h5>
+      <h5 class="card-title">${sObj.price} €</h5>
     </div>
     <div class="flex center">
     <button class="btn btn-primary add-to-cart">Add to cart</button>

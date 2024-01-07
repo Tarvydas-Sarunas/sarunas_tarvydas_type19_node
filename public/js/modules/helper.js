@@ -5,6 +5,7 @@ const baseUrl = 'http://localhost:3000/api';
 export const authUrl = `${baseUrl}/auth`;
 export const rolsUrl = `${baseUrl}/user_roles`;
 export const shopItemsUrl = `${baseUrl}/shop_items`;
+export const itemTypesUrl = `${baseUrl}/item_types`;
 
 //  hellper fetch function
 export async function getDataFetch(url) {

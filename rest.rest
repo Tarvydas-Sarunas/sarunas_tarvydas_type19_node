@@ -63,3 +63,8 @@ Content-Type: application/json
 
 ### gauti visas user roles
 GET http://localhost:3000/api/user_roles
+
+##### USER_ROLES =====================================
+
+### gauti visus shop item tipus
+GET http://localhost:3000/api/item_types

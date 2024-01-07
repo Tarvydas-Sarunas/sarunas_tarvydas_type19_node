@@ -78,7 +78,8 @@ label {
   margin-right: auto;
 }
 input,
-select {
+select,
+textarea {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;

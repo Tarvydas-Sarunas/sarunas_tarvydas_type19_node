@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -6,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <!-- fonts  -->
-  <title>Node examen</title>
+  <title>Document</title>
   <link rel="stylesheet" href="styles/reset.css">
   <link rel="stylesheet" href="styles/style.css">
   <script src="js/add_item.js" type="module"></script>
@@ -20,13 +23,13 @@
     <div class="nav">
       <ul class="main-nav">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="shop.html">SHOP</a>
+          <a class="nav-link " aria-current="page" href="shop.html">SHOP</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="register.html">Register</a>
+          <a class="nav-link active" href="register.html">Register</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link login">Login</a>
+          <a class="nav-link" href="login.html">Login</a>
         </li>
       </ul>
     </div>
@@ -37,21 +40,36 @@
 
   <div class="container">
 
-    <h1>Create New Shop Item</h1>
+    <h1>Create Your New Article</h1>
 
     <div class="form-container">
-      <form id="login-form" class="login-form">
+      <form id="register-form" class="login-form">
         <div class="input-container">
-          <label for="username" class="form-label">Username</label>
-          <input value="jonas@mail.com" type="email" id="username" name="username" class="form-control"
-            placeholder="Enter your email">
+          <label for="article-name" class="form-label">Article Name</label>
+          <input type="text" id="article-name" name="article-name" class="form-control"
+            placeholder="Enter new article name">
         </div>
         <div class="input-container">
-          <label for="password" class="form-label">Password</label>
-          <input type="text" id="password" name="password" class="form-control" placeholder="Enter your password">
+          <label for="prise" class="form-label">Article Prise</label>
+          <input type="text" id="prise" name="prise" class="form-control" placeholder="Enter article prise">
         </div>
         <div class="input-container">
-          <button type="submit" class="btn btn-primary">Login</button>
+          <label for="description" class="form-label">Article Description</label>
+          <input type="text" id="description" name="description" class="form-control"
+            placeholder="Enter article description">
+        </div>
+        <div class="input-container">
+          <label for="image" class="form-label">Article Image</label>
+          <input type="text" id="image" name="image" class="form-control" placeholder="Enter article image url">
+        </div>
+        <div class="input-container">
+          <label for="type" class="form-label">Article Type</label>
+          <select class="form-control" id="type">
+            <option selected disabled value="">Choose article type</option>
+          </select>
+        </div>
+        <div class="input-container">
+          <button type="submit" class="btn btn-primary">Create New Article</button>
         </div>
       </form>
     </div>
