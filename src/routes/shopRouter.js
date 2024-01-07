@@ -1,12 +1,13 @@
 const express = require('express');
 const { dbQueryWithData } = require('../helper');
+const { checkNewShopItem } = require('../middleware');
 const shopRouter = express.Router();
 
 const dbTable = 'shop_items';
 // routes
 
 // POST /api/shop_items - sukurti parduotuves preke su name, price, description, image, item_type_id
-shopRouter.post('/', async (req, res) => {
+shopRouter.post('/', checkNewShopItem, async (req, res) => {
   const {
     shop_item_name: shopItemName,
     price,

@@ -40,10 +40,13 @@ function makeOneCard(sObj) {
       <h5 class="card-title">${sObj.price}</h5>
     </div>
     <div class="flex center">
-      <a href="#" class="btn">Add to cart</a>
+    <button class="btn btn-primary add-to-cart">Add to cart</button>
       <button class="btn btn-secondary delete">Delete</button>
     </div>
   `;
+
+  const addToCartBtn = liEl.querySelector('.add-to-cart');
+  addToCartBtn.addEventListener('click', addToCart);
 
   const btnEl = liEl.querySelector('.delete');
   btnEl.addEventListener('click', deleteShopItem);
@@ -55,11 +58,6 @@ function deleteShopItem(e) {
 
   const cardEl = deleteBtn.closest('.card');
   console.log('cardEl ===', cardEl);
-
-  if (!cardEl) {
-    console.warn('Unable to find parent element with class "card"');
-    return;
-  }
 
   const idToDelete = cardEl.dataset.shopItId;
   console.log('idToDelete ===', idToDelete);
@@ -78,4 +76,10 @@ function deleteShopItem(e) {
     .catch((error) => {
       console.warn('ivyko klaida:', error);
     });
+}
+
+function addToCart(e) {
+  const addToCartBtn = e.target;
+  const cardEl = addToCartBtn.closest('.card');
+  const idToAddToCart = cardEl.dataset.shopItId;
 }

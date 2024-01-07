@@ -1,5 +1,6 @@
 const express = require('express');
 const { dbQueryWithData } = require('../helper');
+const { checkOrder } = require('../middleware');
 
 const ordersRouter = express.Router();
 
@@ -7,7 +8,7 @@ const dbTable = 'orders';
 // routes
 
 // POST /api/orders - sukurti uzsakyma su user_id, shop_item_id, quantity, total_price, status
-ordersRouter.post('/', async (req, res) => {
+ordersRouter.post('/', checkOrder, async (req, res) => {
   const {
     user_id: userId,
     shop_item_id: shopItemId,
@@ -16,18 +17,6 @@ ordersRouter.post('/', async (req, res) => {
     status,
   } = req.body;
 
-  if (
-    userId === undefined ||
-    shopItemId === undefined ||
-    quantity === undefined ||
-    totalPrice === undefined ||
-    status === undefined
-  ) {
-    res
-      .status(400)
-      .json({ error: 'Missing or undefined parameters in the request' });
-    return;
-  }
   const newOrder = [userId, shopItemId, quantity, totalPrice, status];
   const sql = `
     INSERT INTO ${dbTable} (user_id, shop_item_id, quantity, total_price, status)

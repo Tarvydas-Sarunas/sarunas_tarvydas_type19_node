@@ -1,5 +1,6 @@
 const express = require('express');
 const { dbQueryWithData } = require('../helper');
+const { checkAddUserRegister, checkUserLogin } = require('../middleware');
 
 const usersRouter = express.Router();
 
@@ -7,7 +8,7 @@ const dbTable = 'users';
 
 // routes
 // POST /api/auth/register - registruoti vartotoja su name, email, password, role_id
-usersRouter.post('/register', async (req, res) => {
+usersRouter.post('/register', checkAddUserRegister, async (req, res) => {
   const { user_name: userName, email, password, role_id: roleId } = req.body;
 
   console.log('Before checkEmail call');
@@ -58,7 +59,7 @@ async function checkEmail(emailForCheck) {
 }
 
 // POST /api/auth/login - prijungti vartotoja su email ir password
-usersRouter.post('/login', async (req, res) => {
+usersRouter.post('/login', checkUserLogin, async (req, res) => {
   const { email, password } = req.body;
   const sql = `SELECT * FROM ${dbTable} WHERE email=?`;
   const [rows, error] = await dbQueryWithData(sql, [email]);
@@ -66,7 +67,7 @@ usersRouter.post('/login', async (req, res) => {
   // neradom
   if (rows.length === 0) {
     res.status(400).json({
-      msg: 'username or password wrong name',
+      msg: 'username or password wrong',
     });
     return;
   }
@@ -74,7 +75,7 @@ usersRouter.post('/login', async (req, res) => {
   if (rows.length === 1) {
     if (password !== rows[0].password) {
       res.status(400).json({
-        msg: 'username or password wrong pass',
+        msg: 'username or password wrong',
       });
       return;
     }
