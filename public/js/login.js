@@ -34,36 +34,23 @@ function authLogin(userObj) {
     body: JSON.stringify(userObj),
   })
     .then((resp) => {
-      console.log(resp.status);
       // kai sekme tai naviguojam i home page
       if (resp.status === 200) {
         // issaugau i session storage musu prisijungima
-        console.log('Response Status:', resp.status);
         // sessionStorage.setItem('loggedIn', userObj.email);
-        console.log('connection ok');
+        // ir kai visaks ok mane nuveda i shop.html
+        window.location.href = 'shop.html';
+        return resp.json();
+      } else if (resp.status === 400) {
+        isInvalid();
       }
-      if (!resp.ok) {
-        console.log('Response Not OK');
-        throw new Error('Network response was not ok');
-      }
-      // ir kai visaks ok mane nuveda i shop.html
-      // window.location.href = 'shop.html';
       return resp.json();
-      //   } else if (resp.status === 400) {
-      //     isInvalid();
-      //   }
-      //   return resp.json();
     })
     .then((data) => {
-      console.log('Data:', data);
-      isInvalid(data);
       if (data.type === 'validation') {
         alert(data.msg);
         return;
       }
-
-      console.log('Connection Success');
-      window.location.href = 'shop.html';
     })
     .catch((error) => {
       console.warn('ivyko klaida:', error);

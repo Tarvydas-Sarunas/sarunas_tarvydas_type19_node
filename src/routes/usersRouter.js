@@ -59,13 +59,10 @@ async function checkEmail(emailForCheck) {
 
 // POST /api/auth/login - prijungti vartotoja su email ir password
 usersRouter.post('/login', async (req, res) => {
-  console.log('Received login request:', req.body);
-
   const { email, password } = req.body;
   const sql = `SELECT * FROM ${dbTable} WHERE email=?`;
   const [rows, error] = await dbQueryWithData(sql, [email]);
   console.log('error ===', error);
-  console.log('rows ===', rows);
   // neradom
   if (rows.length === 0) {
     res.status(400).json({
