@@ -6,11 +6,10 @@ import { getDataFetch, shopItemsUrl } from './modules/helper.js';
 const els = {
   ulCont: document.getElementById('shop-item-list'),
 };
-console.log('els ===', els);
+
 // ir parsiusti visus shop itemus
 const [shopItemArr, error] = await getDataFetch(shopItemsUrl);
 
-console.log('error ===', error);
 console.log('shopItemArr ===', shopItemArr);
 
 if (Array.isArray(shopItemArr)) {
@@ -18,6 +17,7 @@ if (Array.isArray(shopItemArr)) {
 }
 
 function creatShopItemList(arr) {
+  els.ulCont.innerHTML = '';
   // pagaminti html elementus
   arr.map(makeOneCard).forEach((htmlEl) => {
     // sudeti i sarasa
@@ -28,7 +28,10 @@ function creatShopItemList(arr) {
 function makeOneCard(sObj) {
   const liEl = document.createElement('li');
   liEl.className = 'card';
+  console.log('sObj.shop_item_id ===', sObj.shop_item_id);
   liEl.dataset.shopItId = sObj.shop_item_id;
+  console.log('liEl.dataset.shopItId ===', liEl.dataset.shopItId);
+
   liEl.innerHTML = `
     <img src="${sObj.image}" alt="${sObj.shop_item_name}">
     <div class="card-body">
@@ -38,19 +41,41 @@ function makeOneCard(sObj) {
     </div>
     <div class="flex center">
       <a href="#" class="btn">Add to cart</a>
-      <button class="btn btn-secondary">Delete</button>
-  </div>
-
+      <button class="btn btn-secondary delete">Delete</button>
+    </div>
   `;
-  // Nr 2 de possiblite
-  // const btnEl = liEl.querySelector('button');
-  // btnEl.addEventListener('click', (event) => {
-  //   const btnPressed = event.target;
-  //   deletePet(pObj.pet_id, btnPressed);
-  // });
 
-  // const btnEl = liEl.querySelector('button');
-  // btnEl.addEventListener('click', deletePet);
-
+  const btnEl = liEl.querySelector('.delete');
+  btnEl.addEventListener('click', deleteShopItem);
   return liEl;
+}
+
+function deleteShopItem(e) {
+  const deleteBtn = e.target;
+
+  const cardEl = deleteBtn.closest('.card');
+  console.log('cardEl ===', cardEl);
+
+  if (!cardEl) {
+    console.warn('Unable to find parent element with class "card"');
+    return;
+  }
+
+  const idToDelete = cardEl.dataset.shopItId;
+  console.log('idToDelete ===', idToDelete);
+
+  fetch(`${shopItemsUrl}/${idToDelete}`, {
+    method: 'DELETE',
+  })
+    .then((resp) => {
+      console.log('resp ===', resp);
+      if (resp.status === 200) {
+        console.log('istrinta sekmingai');
+        // jei taip tai istrinti pati elementa (el.remove())
+        cardEl.remove();
+      }
+    })
+    .catch((error) => {
+      console.warn('ivyko klaida:', error);
+    });
 }
