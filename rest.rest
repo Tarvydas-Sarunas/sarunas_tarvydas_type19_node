@@ -22,6 +22,10 @@ Content-Type: application/json
 "password": "pass1"
 }
 
+### gauti user pagal jo email
+GET http://localhost:3000/api/auth/jonas@mail.com
+
+
 ##### SHOP ITEMS =====================================
 
 ### sukurti nauja shop item

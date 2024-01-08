@@ -29,18 +29,15 @@ usersRouter.post('/register', checkAddUserRegister, async (req, res) => {
   const [newUserObj, error] = await dbQueryWithData(sql, newUser);
   console.log('After insert user call');
   if (error) {
-    res.status(500).json({ error: 'Internal server error' });
-    return;
-  }
-  if (newUserObj.affectedRows === 0) {
-    res.status(400).json({ msg: 'Something went wrong' });
+    console.log('error ===', error);
+    res.status(500).json('Server error');
     return;
   }
   if (newUserObj.affectedRows === 1) {
-    res.status(201).json({ msg: 'New user created' });
+    res.status(201).json('Success');
     return;
   }
-  res.json(newUserObj);
+  res.status(400).json(newUserObj);
 });
 
 async function checkEmail(emailForCheck) {
@@ -66,23 +63,42 @@ usersRouter.post('/login', checkUserLogin, async (req, res) => {
   console.log('error ===', error);
   // neradom
   if (rows.length === 0) {
-    res.status(400).json({
-      msg: 'username or password wrong',
-    });
+    res.status(400).json([
+      {
+        error: 'Username or password wrong',
+      },
+    ]);
     return;
   }
   // jei randam turim patikrinti ar sutampa slaptazodis
   if (rows.length === 1) {
     if (password !== rows[0].password) {
-      res.status(400).json({
-        msg: 'username or password wrong',
-      });
+      res.status(400).json([
+        {
+          error: 'Username or password wrong',
+        },
+      ]);
       return;
     }
     res.json({
       msg: 'Login success',
     });
   }
+});
+
+// GET /api/auth/:email - gauti userius
+usersRouter.get('/:email', async (req, res) => {
+  const userEmail = req.params.email;
+  const sql = `SELECT users.user_id, users.user_name, users.email, users.role_id, user_roles.role_name
+  FROM users
+  JOIN user_roles ON users.role_id = user_roles.role_id
+  WHERE users.email = ?`;
+  const [shopItemArr, error] = await dbQueryWithData(sql, [userEmail]);
+  if (error) {
+    res.status(500).json({ error: 'Internal server error' });
+    return;
+  }
+  res.json(shopItemArr);
 });
 
 // export

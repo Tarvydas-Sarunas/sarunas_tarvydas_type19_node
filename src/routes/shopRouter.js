@@ -21,18 +21,15 @@ shopRouter.post('/', checkNewShopItem, async (req, res) => {
     VALUES (?, ?, ?, ?, ?)`;
   const [newShopItRezObj, error] = await dbQueryWithData(sql, shopItem);
   if (error) {
-    res.status(500).json({ error: 'Internal server error' });
-    return;
-  }
-  if (newShopItRezObj.affectedRows === 0) {
-    res.status(400).json({ msg: 'Something went wrong' });
+    console.log('error ===', error);
+    res.status(500).json('Server error');
     return;
   }
   if (newShopItRezObj.affectedRows === 1) {
-    res.status(201).json({ msg: 'New shop item was added' });
+    res.status(201).json('Success');
     return;
   }
-  res.json(newShopItRezObj);
+  res.status(400).json(newShopItRezObj);
 });
 
 // GET /api/shop_items - gauti visas parduotuves prekes

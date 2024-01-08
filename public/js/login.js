@@ -1,14 +1,14 @@
 'use strict';
+
 console.log('login.js file was loaded');
 
-import { authUrl } from './modules/helper.js';
+import { authUrl, getDataFetch } from './modules/helper.js';
 
 const els = {
   form: document.getElementById('login-form'),
   email: document.getElementById('username'),
   password: document.getElementById('password'),
 };
-console.log('els ===', els);
 
 // 1. sukuriu formai eventlistineri kur jis paims inputu value
 els.form.addEventListener('submit', (e) => {
@@ -19,13 +19,12 @@ els.form.addEventListener('submit', (e) => {
     email: els.email.value.trim(),
     password: els.password.value.trim(),
   };
+
   // isiunciu post su
   authLogin(userConnection);
 });
 
 function authLogin(userObj) {
-  console.log('Before fetch call');
-
   fetch(`${authUrl}/login`, {
     method: 'POST',
     headers: {
@@ -33,40 +32,45 @@ function authLogin(userObj) {
     },
     body: JSON.stringify(userObj),
   })
-    .then((resp) => {
-      // kai sekme tai naviguojam i home page
-      if (resp.status === 200) {
-        // issaugau i session storage musu prisijungima
-        // sessionStorage.setItem('loggedIn', userObj.email);
-        // ir kai visaks ok mane nuveda i shop.html
-        window.location.href = 'shop.html';
-        return resp.json();
-      } else if (resp.status === 400) {
-        isInvalid();
-      }
-      return resp.json();
-    })
+    .then((resp) => resp.json())
     .then((data) => {
-      if (data.type === 'validation') {
-        alert(data.msg);
+      console.log('Duomenys ===', data);
+      if (data.msg !== 'Login success') {
+        console.log('Error message from server:', data.msg);
+        isInvalid(data);
         return;
       }
+      // Jei viskas gerai
+      connectToLocal();
+      // Dabar, kai connectToLocal yra baigtas, nukreipiame į shop.html
+      window.location.href = 'shop.html';
     })
     .catch((error) => {
-      console.warn('ivyko klaida:', error);
+      console.error('ivyko klaida:', error);
+      // Tvarkyti kitas klaidas, jei reikia
     });
 }
 
-function isInvalid() {
+async function connectToLocal() {
+  const [roleData, roleError] = await getDataFetch(
+    `${authUrl}/${els.email.value.trim()}`
+  );
+  localStorage.setItem('userRole', roleData[0].role_id);
+  localStorage.setItem('email', els.email.value.trim());
+}
+
+function isInvalid(errArr) {
   // Supprimer les messages d'erreur existants
   clearErrorMessages();
 
-  const divEl = document.createElement('div');
-  divEl.classList.add('invalid-feedback');
-  divEl.textContent = 'Your login or password is wrong';
-  els.email.classList.add('is-invalid');
-  els.password.classList.add('is-invalid');
-  els.password.after(divEl);
+  errArr.forEach((obj) => {
+    const divEl = document.createElement('div');
+    divEl.classList.add('invalid-feedback');
+    divEl.textContent = obj.error;
+    els.email.classList.add('is-invalid');
+    els.password.classList.add('is-invalid');
+    els.password.after(divEl);
+  });
 }
 
 function clearErrorMessages() {
