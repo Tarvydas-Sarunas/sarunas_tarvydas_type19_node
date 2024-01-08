@@ -6,6 +6,7 @@ export const authUrl = `${baseUrl}/auth`;
 export const rolsUrl = `${baseUrl}/user_roles`;
 export const shopItemsUrl = `${baseUrl}/shop_items`;
 export const itemTypesUrl = `${baseUrl}/item_types`;
+export const ordersUrl = `${baseUrl}/orders`;
 
 //  hellper fetch function
 export async function getDataFetch(url) {
