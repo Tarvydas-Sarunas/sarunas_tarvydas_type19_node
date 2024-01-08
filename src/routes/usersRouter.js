@@ -11,12 +11,11 @@ const dbTable = 'users';
 usersRouter.post('/register', checkAddUserRegister, async (req, res) => {
   const { user_name: userName, email, password, role_id: roleId } = req.body;
 
-  console.log('Before checkEmail call');
+  // emeilu patikrinimo funkcija
   const controlEmail = await checkEmail(email);
-  console.log('Check email result:', controlEmail);
-  console.log('After checkEmail call');
+
   if (controlEmail) {
-    res.status(400).json({ msg: 'Email already exists' });
+    res.status(400).json([{ error: 'Email already exists' }]);
     return;
   }
   const newUser = [userName, email, password, roleId];

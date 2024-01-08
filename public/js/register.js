@@ -54,18 +54,57 @@ function createNewUser(userObj) {
     },
     body: JSON.stringify(userObj),
   })
-    .then((resp) => {
-      if (resp.status === 201) {
-        window.location = 'shop.html';
-      } else {
-        return resp.json();
-      }
-    })
+    .then((resp) => resp.json())
     .then((data) => {
-      console.log('data ===', data);
-      // isInvalid([data.msg]);
+      console.log('Duomenys ===', data);
+      if (data.msg !== 'Login success') {
+        console.log('Error message from server:', data.msg);
+        isInvalid(data);
+        return;
+      }
+      // Dabar, kai connectToLocal yra baigtas, nukreipiame į shop.html
+      window.location.href = 'shop.html';
     })
-    .catch((err) => {
-      console.log('err ===', err);
+    .catch((error) => {
+      console.error('ivyko klaida:', error);
+      // Tvarkyti kitas klaidas, jei reikia
     });
+}
+
+function isInvalid(errArr) {
+  // Supprimer les messages d'erreur existants
+  clearErrorMessages();
+
+  errArr.forEach((obj) => {
+    const divEl = document.createElement('div');
+    divEl.classList.add('invalid-feedback');
+    divEl.textContent = obj.error;
+    if (obj.field === 'user_name') {
+      els.username.classList.add('is-invalid');
+      els.username.after(divEl);
+    }
+    if (obj.field === 'email') {
+      els.email.classList.add('is-invalid');
+      els.email.after(divEl);
+    }
+    if (obj.field === 'password') {
+      els.password.classList.add('is-invalid');
+      els.password.after(divEl);
+    }
+    if (obj.field === 'role_id') {
+      els.role.classList.add('is-invalid');
+      els.role.after(divEl);
+    }
+  });
+}
+
+function clearErrorMessages() {
+  // Supprimer les messages d'erreur existants
+  const existingErrorMessages = document.querySelectorAll('.invalid-feedback');
+  existingErrorMessages.forEach((element) => element.remove());
+  // Supprimer la classe 'is-invalid' des champs de saisie
+  els.email.classList.remove('is-invalid');
+  els.username.classList.remove('is-invalid');
+  els.password.classList.remove('is-invalid');
+  els.role.classList.remove('is-invalid');
 }

@@ -13,8 +13,8 @@ async function checkAddUserRegister(req, res, next) {
   const userRegisterSchema = Joi.object({
     user_name: Joi.string().min(3).required(),
     email: Joi.string().email({ minDomainSegments: 2 }).required(),
-    password: Joi.string().min(5).required(),
-    role_id: Joi.number().positive().integer().required(),
+    password: Joi.string().min(3).required(),
+    role_id: Joi.string().required(),
   });
   // testuojam ar atitinka objektas musu schema
   try {
