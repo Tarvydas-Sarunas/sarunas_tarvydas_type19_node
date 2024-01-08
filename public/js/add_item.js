@@ -19,7 +19,6 @@ async function getTypes() {
     console.log('error ===', error);
     return;
   }
-  console.log('data ===', data);
   // suku cikla kad sugeneruoti i option kategorijas
   data.forEach((dObj) => {
     const optionEl = document.createElement('option');
@@ -42,7 +41,6 @@ els.form.addEventListener('submit', (e) => {
     item_type_id: els.type.value.trim(),
   };
 
-  console.log('newUser ===', newShopItem);
   // isiunciu post su
   createNewShopItem(newShopItem);
 });
@@ -55,18 +53,62 @@ function createNewShopItem(shopItemObj) {
     },
     body: JSON.stringify(shopItemObj),
   })
-    .then((resp) => {
-      if (resp.status === 201) {
-        window.location = 'shop.html';
-      } else {
-        return resp.json();
-      }
-    })
+    .then((resp) => resp.json())
     .then((data) => {
-      console.log('data ===', data);
-      // isInvalid([data.msg]);
+      if (data !== 'Success') {
+        console.log('data ===', data);
+        isInvalid(data);
+        return;
+      }
+      // Dabar, kai connectToLocal yra baigtas, nukreipiame į shop.html
+      window.location.href = 'shop.html';
     })
-    .catch((err) => {
-      console.log('err ===', err);
+    .catch((error) => {
+      console.error('ivyko klaida:', error);
+      // Tvarkyti kitas klaidas, jei reikia
     });
+}
+
+function isInvalid(errArr) {
+  // istrinti senesnias klaidas
+  clearErrorMessages();
+
+  // suku cikla ir kvieciu po ju imputais
+  errArr.forEach((obj) => {
+    const divEl = document.createElement('div');
+    divEl.classList.add('invalid-feedback');
+    divEl.textContent = obj.error;
+    if (obj.field === 'shop_item_name') {
+      els.articleName.classList.add('is-invalid');
+      els.articleName.after(divEl);
+    }
+    if (obj.field === 'price') {
+      els.prise.classList.add('is-invalid');
+      els.prise.after(divEl);
+    }
+    if (obj.field === 'description') {
+      els.description.classList.add('is-invalid');
+      els.description.after(divEl);
+    }
+    if (obj.field === 'image') {
+      els.image.classList.add('is-invalid');
+      els.image.after(divEl);
+    }
+    if (obj.field === 'item_type_id') {
+      els.type.classList.add('is-invalid');
+      els.type.after(divEl);
+    }
+  });
+}
+
+function clearErrorMessages() {
+  // istriname klaidas
+  const existingErrorMessages = document.querySelectorAll('.invalid-feedback');
+  existingErrorMessages.forEach((element) => element.remove());
+  // istrinu klase kad neberodytu
+  els.prise.classList.remove('is-invalid');
+  els.articleName.classList.remove('is-invalid');
+  els.description.classList.remove('is-invalid');
+  els.type.classList.remove('is-invalid');
+  els.image.classList.remove('is-invalid');
 }

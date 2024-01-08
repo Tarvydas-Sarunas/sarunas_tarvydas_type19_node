@@ -11,7 +11,6 @@ const els = {
   repeatPassword: document.getElementById('repeat-password'),
   role: document.getElementById('role'),
 };
-console.log('els ===', els);
 
 // gauti is url visas roles ir sudeti jas i selekto option
 async function getRols() {
@@ -20,7 +19,6 @@ async function getRols() {
     console.log('error ===', error);
     return;
   }
-  console.log('data ===', data);
   // suku cikla kad sugeneruoti i option kategorijas
   data.forEach((dObj) => {
     const optionEl = document.createElement('option');
@@ -41,7 +39,6 @@ els.registerForm.addEventListener('submit', (e) => {
     password: els.password.value.trim(),
     role_id: els.role.value.trim(),
   };
-  console.log('newUser ===', newUser);
   // isiunciu post su
   createNewUser(newUser);
 });
@@ -56,7 +53,6 @@ function createNewUser(userObj) {
   })
     .then((resp) => resp.json())
     .then((data) => {
-      console.log('Duomenys ===', data);
       if (data.msg !== 'Login success') {
         console.log('Error message from server:', data.msg);
         isInvalid(data);
@@ -72,9 +68,10 @@ function createNewUser(userObj) {
 }
 
 function isInvalid(errArr) {
-  // Supprimer les messages d'erreur existants
+  // istrinti senesnias klaidas
   clearErrorMessages();
 
+  // suku cikla ir kvieciu po ju imputais
   errArr.forEach((obj) => {
     const divEl = document.createElement('div');
     divEl.classList.add('invalid-feedback');
@@ -99,10 +96,10 @@ function isInvalid(errArr) {
 }
 
 function clearErrorMessages() {
-  // Supprimer les messages d'erreur existants
+  // istriname klaidas
   const existingErrorMessages = document.querySelectorAll('.invalid-feedback');
   existingErrorMessages.forEach((element) => element.remove());
-  // Supprimer la classe 'is-invalid' des champs de saisie
+  // istrinu klase kad neberodytu
   els.email.classList.remove('is-invalid');
   els.username.classList.remove('is-invalid');
   els.password.classList.remove('is-invalid');

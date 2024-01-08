@@ -20,7 +20,7 @@ els.form.addEventListener('submit', (e) => {
     password: els.password.value.trim(),
   };
 
-  // isiunciu post su
+  // isiunciu post su sia funkcija
   authLogin(userConnection);
 });
 
@@ -42,7 +42,7 @@ function authLogin(userObj) {
       }
       // Jei viskas gerai
       connectToLocal();
-      // Dabar, kai connectToLocal yra baigtas, nukreipiame į shop.html
+      // nukreipiame į shop.html
       window.location.href = 'shop.html';
     })
     .catch((error) => {
@@ -60,7 +60,7 @@ async function connectToLocal() {
 }
 
 function isInvalid(errArr) {
-  // Supprimer les messages d'erreur existants
+  // istriname klaidas
   clearErrorMessages();
 
   errArr.forEach((obj) => {
@@ -74,10 +74,10 @@ function isInvalid(errArr) {
 }
 
 function clearErrorMessages() {
-  // Supprimer les messages d'erreur existants
+  // istriname klaidas
   const existingErrorMessages = document.querySelectorAll('.invalid-feedback');
   existingErrorMessages.forEach((element) => element.remove());
-  // Supprimer la classe 'is-invalid' des champs de saisie
+  // istriname klaidas
   els.email.classList.remove('is-invalid');
   els.password.classList.remove('is-invalid');
 }

@@ -25,7 +25,7 @@ async function checkAddUserRegister(req, res, next) {
     console.log('validationResult ===', validationResult);
     next();
   } catch (error) {
-    console.log('error check pet body ===', error);
+    console.log('error check body ===', error);
     // parasyti funkcija errorDetails(error)
     res.errors = formatErrorArr(error);
     // next();
@@ -49,7 +49,7 @@ async function checkUserLogin(req, res, next) {
     console.log('validationResult ===', validationResult);
     next();
   } catch (error) {
-    console.log('error check pet body ===', error);
+    console.log('error check body ===', error);
     // parasyti funkcija errorDetails(error)
     res.errors = formatErrorArr(error);
     // next();
@@ -76,7 +76,7 @@ async function checkOrder(req, res, next) {
     console.log('validationResult ===', validationResult);
     next();
   } catch (error) {
-    console.log('error check pet body ===', error);
+    console.log('error check body ===', error);
     // parasyti funkcija errorDetails(error)
     res.errors = formatErrorArr(error);
     // next();
@@ -89,10 +89,10 @@ async function checkNewShopItem(req, res, next) {
   // aprasom koks bus musu objektas
   const newShopSchema = Joi.object({
     shop_item_name: Joi.string().min(3).required(),
-    price: Joi.number().positive().integer().required(),
+    price: Joi.number().positive().required(),
     description: Joi.string().min(3).required(),
     image: Joi.string().min(3).required(),
-    item_type_id: Joi.number().positive().integer().required(),
+    item_type_id: Joi.string().required(),
   });
   // testuojam ar atitinka objektas musu schema
   try {
@@ -103,7 +103,7 @@ async function checkNewShopItem(req, res, next) {
     console.log('validationResult ===', validationResult);
     next();
   } catch (error) {
-    console.log('error check pet body ===', error);
+    console.log('error check body ===', error);
     // parasyti funkcija errorDetails(error)
     res.errors = formatErrorArr(error);
     // next();

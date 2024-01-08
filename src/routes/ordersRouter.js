@@ -27,6 +27,10 @@ ordersRouter.post('/', checkOrder, async (req, res) => {
     res.status(500).json('Server error');
     return;
   }
+  if (newOrderRezObj.affectedRows === 0) {
+    res.status(400).json(newOrderRezObj);
+    return;
+  }
   if (newOrderRezObj.affectedRows === 1) {
     res.status(201).json('Success');
     return;
@@ -35,7 +39,6 @@ ordersRouter.post('/', checkOrder, async (req, res) => {
 });
 
 // GET /api/orders - gauti visa pilna orders plius user_name, shop_item_name ir shop_item_price
-
 ordersRouter.get('/', async (req, res) => {
   const sql = `SELECT orders.order_id, orders.user_id, users.user_name, orders.shop_item_id, shop_items.shop_item_name, orders.quantity, shop_items.price, orders.total_price, orders.status FROM orders JOIN users ON orders.user_id = users.user_id JOIN shop_items ON orders.shop_item_id = shop_items.shop_item_id`;
   const [rows, error] = await dbQueryWithData(sql);

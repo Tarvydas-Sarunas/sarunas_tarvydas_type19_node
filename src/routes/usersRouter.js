@@ -26,9 +26,7 @@ usersRouter.post('/register', checkAddUserRegister, async (req, res) => {
     `;
   console.log('Before insert user call');
   const [newUserObj, error] = await dbQueryWithData(sql, newUser);
-  console.log('After insert user call');
   if (error) {
-    console.log('error ===', error);
     res.status(500).json('Server error');
     return;
   }
