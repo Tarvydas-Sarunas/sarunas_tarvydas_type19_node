@@ -59,6 +59,15 @@ Content-Type: application/json
   "status": "Draft"
 }
 
+### gauti visus orders su user_name shop_item_name ir price
+GET  http://localhost:3000/api/orders
+
+### gauti visus orders pagal ordersId
+GET  http://localhost:3000/api/orders/1
+
+### gauti visus orders pagal user / userId
+GET  http://localhost:3000/api/orders/user/2
+
 ##### USER_ROLES =====================================
 
 ### gauti visas user roles
