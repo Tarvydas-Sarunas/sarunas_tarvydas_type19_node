@@ -5,8 +5,9 @@ import { getDataFetch, ordersUrl } from './modules/helper.js';
 
 const els = {
   tableBody: document.getElementById('order-table'),
+  userSelect: document.getElementById('users'),
 };
-
+console.log('els ===', els);
 // ir parsiusti visus shop itemus
 const [ordersArr, error] = await getDataFetch(ordersUrl);
 
@@ -15,6 +16,9 @@ console.log('ordersArr ===', ordersArr);
 
 if (Array.isArray(ordersArr)) {
   createOrderTable(ordersArr);
+}
+if (Array.isArray(ordersArr)) {
+  getUsers(ordersArr);
 }
 
 function createOrderTable(arr) {
@@ -41,4 +45,15 @@ function makeTrTh(tObj) {
   <td>${tObj.status}</td>
   `;
   return trEl;
+}
+
+// gauti is url visas userius ir sudeti juos i selekto option
+async function getUsers(tableArr) {
+  // suku cikla kad sugeneruoti i option kategorijas
+  tableArr.forEach((tObj) => {
+    const optionEl = document.createElement('option');
+    optionEl.value = tObj.user_id;
+    optionEl.textContent = tObj.user_name;
+    els.userSelect.append(optionEl);
+  });
 }
