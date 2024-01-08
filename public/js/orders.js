@@ -14,11 +14,27 @@ const [ordersArr, error] = await getDataFetch(ordersUrl);
 console.log('error ===', error);
 console.log('ordersArr ===', ordersArr);
 
+// tikriname ar gauta info is url yra arr
+// jei taip sakome ka daryti
 if (Array.isArray(ordersArr)) {
   createOrderTable(ordersArr);
-}
-if (Array.isArray(ordersArr)) {
   getUsers(ordersArr);
+  filterForSelect();
+}
+
+// iskvieciu selekt su fitru
+els.userSelect.addEventListener('change', filterForSelect);
+
+// pridedu addEventListener selectui kad isirikus useri filtruotu tik jo orderius pagal user_id
+function filterForSelect() {
+  // pasiimu id is selekto
+  const userId = els.userSelect.value;
+  console.log('userId ===', userId);
+  // Filtrer les commandes pour l'utilisateur sélectionné
+  const userOrders = ordersArr.filter((tObj) => tObj.user_id == userId);
+  console.log('userOrders ===', userOrders);
+  // Mettez à jour le tableau avec les nouvelles commandes
+  createOrderTable(userOrders);
 }
 
 function createOrderTable(arr) {
@@ -47,7 +63,7 @@ function makeTrTh(tObj) {
   return trEl;
 }
 
-// gauti is url visas userius ir sudeti juos i selekto option
+// sudeti userius i selekto option
 async function getUsers(tableArr) {
   // suku cikla kad sugeneruoti i option kategorijas
   tableArr.forEach((tObj) => {
