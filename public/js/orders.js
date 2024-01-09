@@ -8,12 +8,9 @@ const els = {
   tableBody: document.getElementById('order-table'),
   userSelect: document.getElementById('users'),
 };
-console.log('els ===', els);
+
 // ir parsiusti visus shop itemus
 const [ordersArr, error] = await getDataFetch(ordersUrl);
-
-console.log('error ===', error);
-console.log('ordersArr ===', ordersArr);
 
 // tikriname ar gauta info is url yra arr
 // jei taip sakome ka daryti
@@ -26,15 +23,12 @@ if (Array.isArray(ordersArr)) {
 els.userSelect.addEventListener('input', filterForSelect);
 // pridedu addEventListener selectui kad isirikus useri filtruotu tik jo orderius pagal user_id
 function filterForSelect() {
-  console.log('filterForSelect called');
   // pasiimu id is selekto
   const userId = els.userSelect.value;
-  console.log('userId ===', userId);
   // Filtrer les commandes pour l'utilisateur sélectionné
   const userOrders = ordersArr.filter(
     (tObj) => tObj.user_id === parseInt(userId, 10)
   );
-  console.log('userOrders ===', userOrders);
   // Mettez à jour le tableau avec les nouvelles commandes
   createOrderTable(userOrders);
 }

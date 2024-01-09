@@ -7,7 +7,7 @@ import {
   ordersUrl,
   shopItemsUrl,
 } from './modules/helper.js';
-import { createNavBar } from './modules/navBar.js';
+import { createNavBar, loginOrNo } from './modules/navBar.js';
 
 const els = {
   ulCont: document.getElementById('shop-item-list'),
@@ -69,7 +69,7 @@ function makeOneCard(sObj) {
     <input type="number" id="quantity" class="shop"
             placeholder="Quantity">
     <button class="btn btn-primary add-to-cart">Cart</button>
-      <button class="btn btn-secondary delete">Delete</button>
+    <button class="btn btn-secondary delete">Delete</button>
     </div>
   `;
 
@@ -209,6 +209,26 @@ function clearErrorMessages() {
   const existinMessages = document.getElementById('quantity');
   existinMessages.classList.remove('is-valid');
 }
+
+function hideBtn() {
+  const userRole = localStorage.getItem('userRole');
+  const userLogin = localStorage.getItem('areLogin') === 'true';
+
+  const els = {
+    btnDelete: document.querySelector('.delete'),
+    btnAddCart: document.querySelector('.add-to-cart'),
+  };
+
+  if (userLogin && userRole === '1') {
+    els.btnDelete.style.display = 'inline-block';
+    els.btnAddCart.style.display = 'none';
+  } else {
+    els.btnAddCart.style.display = 'inline-block';
+    els.btnDelete.style.display = 'none';
+  }
+}
+
+hideBtn();
 
 createNavBar();
 loginOrNo();

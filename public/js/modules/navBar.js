@@ -26,6 +26,9 @@ function createNavBar() {
         <a id="loginLink" class="nav-link login" href="login.html">Login</a>
       </li>
       <li class="nav-item">
+        <a id="addItemLink" class="nav-link" href="add_item.html">Add article</a>
+      </li>
+      <li class="nav-item">
         <a id="logoutLink" class="nav-link logout" style="display: none;">Logout</a>
       </li>
     </ul>
@@ -39,21 +42,30 @@ function createNavBar() {
 // patikrinu ar prisilogines ar ne
 function loginOrNo() {
   const userLogin = localStorage.getItem('areLogin') === 'true';
+  const userRole = localStorage.getItem('userRole'); // Ajout de cette ligne
 
   const els = {
     registerLink: document.getElementById('registerLink'),
     loginLink: document.getElementById('loginLink'),
     logoutLink: document.getElementById('logoutLink'),
+    addItemLink: document.getElementById('addItemLink'),
   };
 
   if (userLogin) {
     els.registerLink.style.display = 'none';
     els.loginLink.style.display = 'none';
     els.logoutLink.style.display = 'inline-block';
+    // ar admin
+    if (userRole === '1') {
+      els.addItemLink.style.display = 'inline-block';
+    } else {
+      els.addItemLink.style.display = 'none';
+    }
   } else {
     els.registerLink.style.display = 'inline-block';
     els.loginLink.style.display = 'inline-block';
     els.logoutLink.style.display = 'none';
+    els.addItemLink.style.display = 'none';
   }
 
   // eventListiner
