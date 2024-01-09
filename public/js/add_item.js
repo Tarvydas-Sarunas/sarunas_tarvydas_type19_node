@@ -2,6 +2,7 @@
 console.log('add_item.js file was loaded');
 
 import { getDataFetch, itemTypesUrl, shopItemsUrl } from './modules/helper.js';
+import { createNavBar, loginOrNo } from './modules/navBar.js';
 
 const els = {
   form: document.getElementById('register-form'),
@@ -112,3 +113,6 @@ function clearErrorMessages() {
   els.type.classList.remove('is-invalid');
   els.image.classList.remove('is-invalid');
 }
+
+createNavBar();
+loginOrNo();

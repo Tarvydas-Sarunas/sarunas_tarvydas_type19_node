@@ -31,7 +31,7 @@ usersRouter.post('/register', checkAddUserRegister, async (req, res) => {
     return;
   }
   if (newUserObj.affectedRows === 1) {
-    res.status(201).json('Success');
+    res.status(201).json([{ msg: 'Success' }]);
     return;
   }
   res.status(400).json(newUserObj);
@@ -44,7 +44,7 @@ async function checkEmail(emailForCheck) {
 
   // jei klaida
   if (error) {
-    console.error('Error checking email existence:', error);
+    console.error('Error email:', error);
     return false;
   }
 

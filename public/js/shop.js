@@ -7,6 +7,7 @@ import {
   ordersUrl,
   shopItemsUrl,
 } from './modules/helper.js';
+import { createNavBar } from './modules/navBar.js';
 
 const els = {
   ulCont: document.getElementById('shop-item-list'),
@@ -208,3 +209,6 @@ function clearErrorMessages() {
   const existinMessages = document.getElementById('quantity');
   existinMessages.classList.remove('is-valid');
 }
+
+createNavBar();
+loginOrNo();

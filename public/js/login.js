@@ -3,6 +3,7 @@
 console.log('login.js file was loaded');
 
 import { authUrl, getDataFetch } from './modules/helper.js';
+import { createNavBar, loginOrNo } from './modules/navBar.js';
 
 const els = {
   form: document.getElementById('login-form'),
@@ -44,6 +45,8 @@ function authLogin(userObj) {
       return connectToLocal();
     })
     .then(() => {
+      // iskvieciu patikrinima ar prisijunges
+      loginOrNo();
       // nukreipiame į shop.html
       window.location.href = 'shop.html';
     })
@@ -59,6 +62,7 @@ async function connectToLocal() {
   );
   localStorage.setItem('email', els.email.value.trim());
   localStorage.setItem('userRole', roleData[0].role_id);
+  localStorage.setItem('areLogin', true);
 }
 
 function isInvalid(errArr) {
@@ -83,3 +87,5 @@ function clearErrorMessages() {
   els.email.classList.remove('is-invalid');
   els.password.classList.remove('is-invalid');
 }
+createNavBar();
+loginOrNo();

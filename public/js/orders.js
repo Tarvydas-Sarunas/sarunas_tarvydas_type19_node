@@ -2,6 +2,7 @@
 console.log('orders.js file was loaded');
 
 import { getDataFetch, ordersUrl } from './modules/helper.js';
+import { createNavBar, loginOrNo } from './modules/navBar.js';
 
 const els = {
   tableBody: document.getElementById('order-table'),
@@ -74,3 +75,6 @@ async function getUsers(tableArr) {
     els.userSelect.append(optionEl);
   });
 }
+
+createNavBar();
+loginOrNo();

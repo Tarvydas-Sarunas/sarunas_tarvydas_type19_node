@@ -39,7 +39,7 @@ header {
 }
 .nav-link:hover,
 .logo:hover {
-  background-color: ;
+  font-weight: bold;
 }
 .nav-item {
   list-style: none;
@@ -49,8 +49,22 @@ header {
 }
 .login {
   background-color: var(--second-color);
+  font-weight: bold;
   border-radius: 5px;
   padding: 0.4rem 1.3rem;
+}
+.login:hover {
+  background-color: rgb(119, 192, 8);
+}
+.logout {
+  background-color: rgb(240, 52, 52);
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 0.4rem 1.3rem;
+}
+.logout:hover {
+  background-color: var(--black);
 }
 .hr {
   width: 100%;

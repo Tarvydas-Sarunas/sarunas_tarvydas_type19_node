@@ -2,6 +2,7 @@
 console.log('register.js file was loaded');
 
 import { authUrl, getDataFetch, rolsUrl } from './modules/helper.js';
+import { createNavBar, loginOrNo } from './modules/navBar.js';
 
 const els = {
   registerForm: document.getElementById('register-form'),
@@ -53,18 +54,33 @@ function createNewUser(userObj) {
   })
     .then((resp) => resp.json())
     .then((data) => {
-      if (data.msg !== 'Login success') {
+      if (data.msg && data.msg !== 'Login success') {
         console.log('Error message from server:', data.msg);
         isInvalid(data);
         return;
       }
-      // Dabar, kai connectToLocal yra baigtas, nukreipiame į shop.html
+      // Jei viskas gerai
+      return connectToLocal();
+    })
+    .then(() => {
+      // iskvieciu patikrinima ar prisijunges
+      loginOrNo();
+      // nukreipiame į shop.html
       window.location.href = 'shop.html';
     })
     .catch((error) => {
       console.error('ivyko klaida:', error);
       // Tvarkyti kitas klaidas, jei reikia
     });
+}
+
+async function connectToLocal() {
+  const [roleData, roleError] = await getDataFetch(
+    `${authUrl}/${els.email.value.trim()}`
+  );
+  localStorage.setItem('email', els.email.value.trim());
+  localStorage.setItem('userRole', roleData[0].role_id);
+  localStorage.setItem('areLogin', true);
 }
 
 function isInvalid(errArr) {
@@ -105,3 +121,6 @@ function clearErrorMessages() {
   els.password.classList.remove('is-invalid');
   els.role.classList.remove('is-invalid');
 }
+
+createNavBar();
+loginOrNo();
