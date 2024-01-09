@@ -19,16 +19,18 @@ if (Array.isArray(ordersArr)) {
   filterForSelect();
   getUsers(ordersArr);
 }
+
 // iskvieciu selekt su fitru
 els.userSelect.addEventListener('input', filterForSelect);
+
 // pridedu addEventListener selectui kad isirikus useri filtruotu tik jo orderius pagal user_id
 function filterForSelect() {
   // pasiimu id is selekto
   const userId = els.userSelect.value;
   // Filtrer les commandes pour l'utilisateur sélectionné
-  const userOrders = ordersArr.filter(
-    (tObj) => tObj.user_id === parseInt(userId, 10)
-  );
+  const userOrders = userId
+    ? ordersArr.filter((tObj) => tObj.user_id === parseInt(userId, 10))
+    : ordersArr;
   // Mettez à jour le tableau avec les nouvelles commandes
   createOrderTable(userOrders);
 }

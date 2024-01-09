@@ -68,7 +68,7 @@ function makeOneCard(sObj) {
     <div class="flex center">
     <input type="number" id="quantity" class="shop"
             placeholder="Quantity">
-    <button class="btn btn-primary add-to-cart">Cart</button>
+    <button class="btn btn-primary add-to-cart">Add To Cart</button>
     <button class="btn btn-secondary delete">Delete</button>
     </div>
   `;
@@ -213,11 +213,14 @@ function clearErrorMessages() {
 function hideBtn() {
   const userRole = localStorage.getItem('userRole');
   const userLogin = localStorage.getItem('areLogin') === 'true';
-
+  console.log('userRole ===', userRole);
+  console.log('userLogin ===', userLogin);
   const els = {
     btnDelete: document.querySelector('.delete'),
     btnAddCart: document.querySelector('.add-to-cart'),
   };
+
+  console.log('els ===', els);
 
   if (userLogin && userRole === '1') {
     els.btnDelete.style.display = 'inline-block';
