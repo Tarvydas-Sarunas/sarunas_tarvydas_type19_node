@@ -24,18 +24,18 @@ ordersRouter.post('/', checkOrder, async (req, res) => {
   const [newOrderRezObj, error] = await dbQueryWithData(sql, newOrder);
   if (error) {
     console.log('error ===', error);
-    res.status(500).json('Server error');
+    res.status(500).json([{ error: 'Server error' }]);
     return;
   }
   if (newOrderRezObj.affectedRows === 0) {
-    res.status(400).json(newOrderRezObj);
+    res.status(400).json([newOrderRezObj]);
     return;
   }
   if (newOrderRezObj.affectedRows === 1) {
-    res.status(201).json('Success');
+    res.status(201).json([{ msg: 'Success' }]);
     return;
   }
-  res.json(newOrderRezObj);
+  res.json([newOrderRezObj]);
 });
 
 // GET /api/orders - gauti visa pilna orders plius user_name, shop_item_name ir shop_item_price

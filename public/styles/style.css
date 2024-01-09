@@ -134,6 +134,15 @@ textarea {
 .is-invalid {
   background-color: #e99090;
 }
+.valid-feedback {
+  padding-top: 1rem;
+  font-size: 1.5rem;
+  color: #90e990;
+}
+.is-valid {
+  background-color: #90e990;
+}
+
 .unlisted {
   list-style: none;
   padding-left: 0;

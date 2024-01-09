@@ -64,7 +64,7 @@ async function checkOrder(req, res, next) {
     user_id: Joi.number().positive().integer().required(),
     shop_item_id: Joi.number().positive().integer().required(),
     quantity: Joi.number().positive().integer().required(),
-    total_price: Joi.number().positive().integer().required(),
+    total_price: Joi.number().positive().required(),
     status: Joi.string().min(3).required(),
   });
   // testuojam ar atitinka objektas musu schema

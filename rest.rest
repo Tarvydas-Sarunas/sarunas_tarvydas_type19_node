@@ -51,7 +51,7 @@ DELETE http://localhost:3000/api/shop_items/5
 
 #####  ORDERS =====================================
 
-### sukurti nauja shop item
+### sukurti nauja orderi
 POST http://localhost:3000/api/orders
 Content-Type: application/json
 

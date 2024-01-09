@@ -1,7 +1,12 @@
 'use strict';
 console.log('shop.js file was loaded');
 
-import { getDataFetch, ordersUrl, shopItemsUrl } from './modules/helper.js';
+import {
+  authUrl,
+  getDataFetch,
+  ordersUrl,
+  shopItemsUrl,
+} from './modules/helper.js';
 
 const els = {
   ulCont: document.getElementById('shop-item-list'),
@@ -9,9 +14,31 @@ const els = {
 
 // ir parsiusti visus shop itemus
 const [shopItemArr, error] = await getDataFetch(shopItemsUrl);
+const [authArr, authError] = await getDataFetch(
+  `${authUrl}/${localStorage.getItem('email')}`
+);
 
 if (Array.isArray(shopItemArr)) {
   creatShopItemList(shopItemArr);
+}
+
+let userId;
+
+function findUserId(uArr) {
+  const userObj = uArr.find(
+    (uObj) => uObj.email === localStorage.getItem('email')
+  );
+  if (userObj) {
+    userId = userObj.user_id;
+  } else {
+    userId = null;
+  }
+  console.log('userId ===', userId);
+  return userId;
+}
+
+if (Array.isArray(authArr)) {
+  findUserId(authArr);
 }
 
 function creatShopItemList(arr) {
@@ -80,6 +107,7 @@ function deleteShopItem(e) {
 }
 
 // ====================================================================
+
 function addToCart(e) {
   const addToCartBtn = e.target;
   const cardEl = addToCartBtn.closest('.card');
@@ -89,16 +117,24 @@ function addToCart(e) {
   const quantityInput = cardEl.querySelector('.shop');
   const itemQuantity = parseInt(quantityInput.value, 10);
 
+  console.log('idShopItem ===', idShopItem);
   // pasiemu info is shopItemArr kuri parsisiunciau su getDataFetch
-  const shopItem = shopItemArr.find((sObj) => sObj.shop_item_id === idShopItem);
+  const shopItem = shopItemArr.find(
+    (sObj) => sObj.shop_item_id === parseInt(idShopItem, 10)
+  );
 
+  // patikrinam ar gavom gera objekta
+  if (!shopItem) {
+    console.error('Shop item not found.');
+    return;
+  }
+  const price = shopItem.price;
   // naujas objektas kuri siusiu
   const newOrder = {
-    user_id: localStorage.getItem('user_id'),
+    user_id: userId,
     shop_item_id: shopItem.shop_item_id,
-    price: shopItem.price,
     quantity: itemQuantity,
-    total_price: shopItem.price * itemQuantity,
+    total_price: price * itemQuantity,
     status: 'Order placed',
   };
 
@@ -108,7 +144,7 @@ function addToCart(e) {
 
 // funkcija issiuntimui i serveri
 function orderToServer(order) {
-  fetch(`${ordersUrl}/orders`, {
+  fetch(`${ordersUrl}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -117,18 +153,30 @@ function orderToServer(order) {
   })
     .then((resp) => resp.json())
     .then((data) => {
-      if (data.msg !== 'Login success') {
-        console.log('Error message from server:', data.msg);
+      if (data.msg !== 'Success') {
+        console.log('Error message from server:', data);
         isInvalid(data);
-        return;
+      } else {
+        console.log('Success message from server:', data);
+        isValid(data);
       }
-      // Dabar, kai connectToLocal yra baigtas, nukreipiame į shop.html
-      // window.location.href = 'shop.html';
     })
     .catch((error) => {
       console.error('ivyko klaida:', error);
       // Tvarkyti kitas klaidas, jei reikia
     });
+}
+
+// valide
+function isValid(data) {
+  // istrinti senesnias klaidas
+  clearErrorMessages();
+
+  // suku cikla ir kvieciu po ju imputais
+  if (data.msg === 'Success') {
+    const quantityInput = document.getElementById('quantity');
+    quantityInput.classList.add('is-valid');
+  }
 }
 
 function isInvalid(errArr) {
@@ -151,8 +199,12 @@ function isInvalid(errArr) {
 function clearErrorMessages() {
   // istriname klaidas
   const existingErrorMessages = document.querySelectorAll('.invalid-feedback');
+
   existingErrorMessages.forEach((element) => element.remove());
   // istrinu klase kad neberodytu
   const quantityInput = document.querySelector('.shop');
   quantityInput.classList.remove('is-invalid');
+
+  const existinMessages = document.getElementById('quantity');
+  existinMessages.classList.remove('is-valid');
 }
