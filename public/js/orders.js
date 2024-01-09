@@ -71,6 +71,24 @@ async function getUsers(tableArr) {
     els.userSelect.append(optionEl);
   });
 }
+function hideBtn() {
+  const userRole = localStorage.getItem('userRole');
+  const userLogin = localStorage.getItem('areLogin') === 'true';
+
+  if (userLogin) {
+    if (userRole === '1') {
+      // jei amin prisijunges
+      els.userSelect.style.display = 'inline-block';
+    } else {
+      // jei ne adminas prisijunges
+      els.userSelect.style.display = 'none';
+    }
+  } else {
+    // jei visiskai neprisijunges
+    els.userSelect.style.display = 'none';
+  }
+}
+hideBtn();
 
 createNavBar();
 loginOrNo();

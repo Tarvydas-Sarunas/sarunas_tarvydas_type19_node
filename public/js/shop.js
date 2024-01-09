@@ -34,7 +34,6 @@ function findUserId(uArr) {
   } else {
     userId = null;
   }
-  console.log('userId ===', userId);
   return userId;
 }
 
@@ -228,7 +227,7 @@ function hideBtn() {
       deleteBtns.forEach((btn) => (btn.style.display = 'none'));
     }
   } else {
-    // Si l'utilisateur n'est pas connecté
+    // jei visiskai neprisijunges
     addCartBtns.forEach((btn) => (btn.style.display = 'none'));
     deleteBtns.forEach((btn) => (btn.style.display = 'none'));
   }
