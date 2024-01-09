@@ -18,20 +18,21 @@ console.log('ordersArr ===', ordersArr);
 // jei taip sakome ka daryti
 if (Array.isArray(ordersArr)) {
   createOrderTable(ordersArr);
-  getUsers(ordersArr);
   filterForSelect();
+  getUsers(ordersArr);
 }
-
 // iskvieciu selekt su fitru
-els.userSelect.addEventListener('change', filterForSelect);
-
+els.userSelect.addEventListener('input', filterForSelect);
 // pridedu addEventListener selectui kad isirikus useri filtruotu tik jo orderius pagal user_id
 function filterForSelect() {
+  console.log('filterForSelect called');
   // pasiimu id is selekto
   const userId = els.userSelect.value;
   console.log('userId ===', userId);
   // Filtrer les commandes pour l'utilisateur sélectionné
-  const userOrders = ordersArr.filter((tObj) => tObj.user_id == userId);
+  const userOrders = ordersArr.filter(
+    (tObj) => tObj.user_id === parseInt(userId, 10)
+  );
   console.log('userOrders ===', userOrders);
   // Mettez à jour le tableau avec les nouvelles commandes
   createOrderTable(userOrders);
@@ -48,7 +49,7 @@ function createOrderTable(arr) {
 
 function makeTrTh(tObj) {
   const trEl = document.createElement('tr');
-  // liEl.dataset.shopItId = sObj.shop_item_id;
+
   trEl.innerHTML = `
   <td>${tObj.order_id}</td>
   <td>${tObj.user_id}</td>

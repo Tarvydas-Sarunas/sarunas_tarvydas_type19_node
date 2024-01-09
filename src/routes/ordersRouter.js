@@ -35,7 +35,7 @@ ordersRouter.post('/', checkOrder, async (req, res) => {
     res.status(201).json('Success');
     return;
   }
-  res.status(400).json(newOrderRezObj);
+  res.json(newOrderRezObj);
 });
 
 // GET /api/orders - gauti visa pilna orders plius user_name, shop_item_name ir shop_item_price

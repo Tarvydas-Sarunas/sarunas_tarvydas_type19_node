@@ -41,7 +41,9 @@ function authLogin(userObj) {
         return;
       }
       // Jei viskas gerai
-      connectToLocal();
+      return connectToLocal();
+    })
+    .then(() => {
       // nukreipiame į shop.html
       window.location.href = 'shop.html';
     })
@@ -55,8 +57,8 @@ async function connectToLocal() {
   const [roleData, roleError] = await getDataFetch(
     `${authUrl}/${els.email.value.trim()}`
   );
-  localStorage.setItem('userRole', roleData[0].role_id);
   localStorage.setItem('email', els.email.value.trim());
+  localStorage.setItem('userRole', roleData[0].role_id);
 }
 
 function isInvalid(errArr) {
