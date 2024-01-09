@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="styles/reset.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <script src="js/orders.js" type="module"></script>
+</head>
+
+<body>
+  <header id="nav-container">
+  </header>
+
+  <div class="hr"></div>
+  <div class="container">
+
+    <h1>Orders</h1>
+
+    <div class="user-input-container">
+      <label for="users" class="form-order-label">Users</label>
+      <select class="form-control" id="users">
+        <option selected disabled value="">Please select one user</option>
+      </select>
+    </div>
+
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Order Id</th>
+          <th>User Id</th>
+          <th>Name</th>
+          <th>Shop Item Id</th>
+          <th>Item Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total Price</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="order-table">
+      </tbody>
+    </table>
+
+  </div>
+</body>
+
+</html>

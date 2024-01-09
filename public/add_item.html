@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- fonts  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <!-- fonts  -->
+  <title>Document</title>
+  <link rel="stylesheet" href="styles/reset.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <script src="js/add_item.js" type="module"></script>
+</head>
+
+<body>
+  <header id="nav-container">
+  </header>
+
+  <div class="hr"></div>
+
+
+
+  <div class="container">
+
+    <h1>Create New Article</h1>
+
+    <div class="form-container">
+      <form id="register-form" class="login-form">
+        <div class="input-container">
+          <label for="article-name" class="form-label">Article Name</label>
+          <input type="text" id="article-name" name="article-name" class="form-control"
+            placeholder="Enter new article name">
+        </div>
+        <div class="input-container">
+          <label for="prise" class="form-label">Article Prise</label>
+          <input type="text" id="prise" name="prise" class="form-control" placeholder="Enter article prise">
+        </div>
+        <div class="input-container">
+          <label for="description" class="form-label">Article Description</label>
+          <textarea type="text" id="description" name="description" class="form-control"
+            placeholder="Enter article description"></textarea>
+        </div>
+        <div class="input-container">
+          <label for="image" class="form-label">Article Image</label>
+          <input type="text" id="image" name="image" class="form-control" placeholder="Enter article image url">
+        </div>
+        <div class="input-container">
+          <label for="type" class="form-label">Article Type</label>
+          <select class="form-control" id="type">
+            <option selected disabled value="">Choose article type</option>
+          </select>
+        </div>
+        <div class="input-container">
+          <button type="submit" class="btn btn-primary">Create New Article</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

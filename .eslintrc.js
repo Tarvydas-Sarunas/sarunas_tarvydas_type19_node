@@ -3,6 +3,7 @@ module.exports = {
     commonjs: true,
     es2021: true,
     node: true,
+    browser: true,
   },
   extends: 'airbnb-base',
   overrides: [
@@ -21,5 +22,6 @@ module.exports = {
   },
   rules: {
     'no-console': 'off',
+    'linebreak-style': 'off',
   },
 };

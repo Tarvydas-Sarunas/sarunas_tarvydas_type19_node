@@ -1,5 +1,83 @@
 GET http://localhost:3000
 
-###
-GET http://localhost:3000/api/users
+##### USERS =====================================
 
+### create user
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+"user_name": "Laimonas", 
+"email": "laimonas.lietuva@mail.com", 
+"password": "pass15", 
+"role_id": 2
+}
+
+### user prisijungimas
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+"email": "jonas@mail.com",  
+"password": "pass1"
+}
+
+### gauti user pagal jo email
+GET http://localhost:3000/api/auth/jonas@mail.com
+
+
+##### SHOP ITEMS =====================================
+
+### sukurti nauja shop item
+POST http://localhost:3000/api/shop_items
+Content-Type: application/json
+
+{
+  "shop_item_name": "Alus",
+  "price": "1.50",
+  "description": "Lengvas ir labai gaivinantis",
+  "image": "https://rimibaltic-res.cloudinary.com/image/upload/b_white,c_fit,f_auto,h_480,q_auto,w_480/d_ecommerce:backend-fallback.png/MAT_1359398_PCE_LT",
+  "item_type_id": 2
+}
+
+### gauti visus shop itemus
+GET http://localhost:3000/api/shop_items
+
+### gauti viena shop itema
+GET http://localhost:3000/api/shop_items/1
+
+### istrina viena shop_item pagal jo id
+DELETE http://localhost:3000/api/shop_items/5
+
+#####  ORDERS =====================================
+
+### sukurti nauja orderi
+POST http://localhost:3000/api/orders
+Content-Type: application/json
+
+{
+  "user_id": 5,
+  "shop_item_id": 3,
+  "quantity": 2,
+  "total_price": 2,
+  "status": "Draft"
+}
+
+### gauti visus orders su user_name shop_item_name ir price
+GET  http://localhost:3000/api/orders
+
+### gauti visus orders pagal ordersId
+GET  http://localhost:3000/api/orders/1
+
+### gauti visus orders pagal user / userId
+GET  http://localhost:3000/api/orders/user/2
+
+##### USER_ROLES =====================================
+
+### gauti visas user roles
+GET http://localhost:3000/api/user_roles
+
+##### USER_ROLES =====================================
+
+### gauti visus shop item tipus
+GET http://localhost:3000/api/item_types
