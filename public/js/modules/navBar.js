@@ -7,7 +7,7 @@ const navContainer = document.getElementById('nav-container');
 function createNavBar() {
   const logoDiv = document.createElement('div');
   logoDiv.classList.add('logo');
-  logoDiv.innerHTML = `<a href="#" class="logo">New Store</a>`;
+  logoDiv.innerHTML = `<a href="shop.html" class="logo">New Store</a>`;
 
   const navbar = document.createElement('div');
   navbar.classList.add('nav');

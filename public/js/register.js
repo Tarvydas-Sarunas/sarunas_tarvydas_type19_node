@@ -54,17 +54,12 @@ function createNewUser(userObj) {
   })
     .then((resp) => resp.json())
     .then((data) => {
-      if (data.msg && data.msg !== 'Login success') {
+      console.log('Duomenys ===', data);
+      if (data.msg !== 'Login success') {
         console.log('Error message from server:', data.msg);
         isInvalid(data);
         return;
       }
-      // Jei viskas gerai
-      return connectToLocal();
-    })
-    .then(() => {
-      // iskvieciu patikrinima ar prisijunges
-      loginOrNo();
       // nukreipiame į shop.html
       window.location.href = 'shop.html';
     })
@@ -72,15 +67,6 @@ function createNewUser(userObj) {
       console.error('ivyko klaida:', error);
       // Tvarkyti kitas klaidas, jei reikia
     });
-}
-
-async function connectToLocal() {
-  const [roleData, roleError] = await getDataFetch(
-    `${authUrl}/${els.email.value.trim()}`
-  );
-  localStorage.setItem('email', els.email.value.trim());
-  localStorage.setItem('userRole', roleData[0].role_id);
-  localStorage.setItem('areLogin', true);
 }
 
 function isInvalid(errArr) {

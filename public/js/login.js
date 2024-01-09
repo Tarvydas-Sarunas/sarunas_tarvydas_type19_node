@@ -39,7 +39,7 @@ function authLogin(userObj) {
       if (data.msg !== 'Login success') {
         console.log('Error message from server:', data.msg);
         isInvalid(data);
-        return;
+        return Promise.reject('Login failed'); // Rejeter la promesse en cas d'échec de connexion
       }
       // Jei viskas gerai
       return connectToLocal();
@@ -51,8 +51,10 @@ function authLogin(userObj) {
       window.location.href = 'shop.html';
     })
     .catch((error) => {
-      console.error('ivyko klaida:', error);
-      // Tvarkyti kitas klaidas, jei reikia
+      if (error !== 'Login failed') {
+        console.error('ivyko klaida:', error);
+        // Tvarkyti kitas klaidas, jei reikia
+      }
     });
 }
 
@@ -87,5 +89,6 @@ function clearErrorMessages() {
   els.email.classList.remove('is-invalid');
   els.password.classList.remove('is-invalid');
 }
+
 createNavBar();
 loginOrNo();
