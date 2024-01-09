@@ -20,7 +20,7 @@ const [authArr, authError] = await getDataFetch(
 );
 
 if (Array.isArray(shopItemArr)) {
-  creatShopItemList(shopItemArr);
+  createShopItemList(shopItemArr);
 }
 
 let userId;
@@ -42,7 +42,7 @@ if (Array.isArray(authArr)) {
   findUserId(authArr);
 }
 
-function creatShopItemList(arr) {
+function createShopItemList(arr) {
   els.ulCont.innerHTML = '';
   // pagaminti html elementus
   arr.map(makeOneCard).forEach((htmlEl) => {
@@ -213,21 +213,24 @@ function clearErrorMessages() {
 function hideBtn() {
   const userRole = localStorage.getItem('userRole');
   const userLogin = localStorage.getItem('areLogin') === 'true';
-  console.log('userRole ===', userRole);
-  console.log('userLogin ===', userLogin);
-  const els = {
-    btnDelete: document.querySelector('.delete'),
-    btnAddCart: document.querySelector('.add-to-cart'),
-  };
 
-  console.log('els ===', els);
+  const addCartBtns = document.querySelectorAll('.add-to-cart');
+  const deleteBtns = document.querySelectorAll('.delete');
 
-  if (userLogin && userRole === '1') {
-    els.btnDelete.style.display = 'inline-block';
-    els.btnAddCart.style.display = 'none';
+  if (userLogin) {
+    if (userRole === '1') {
+      // jei amin prisijunges
+      addCartBtns.forEach((btn) => (btn.style.display = 'none'));
+      deleteBtns.forEach((btn) => (btn.style.display = 'inline-block'));
+    } else {
+      // jei ne adminas prisijunges
+      addCartBtns.forEach((btn) => (btn.style.display = 'inline-block'));
+      deleteBtns.forEach((btn) => (btn.style.display = 'none'));
+    }
   } else {
-    els.btnAddCart.style.display = 'inline-block';
-    els.btnDelete.style.display = 'none';
+    // Si l'utilisateur n'est pas connecté
+    addCartBtns.forEach((btn) => (btn.style.display = 'none'));
+    deleteBtns.forEach((btn) => (btn.style.display = 'none'));
   }
 }
 
